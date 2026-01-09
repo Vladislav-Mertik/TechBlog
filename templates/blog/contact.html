@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Контакти - TechBlog{% endblock %}
+
+{% block content %}
+
+<h1>Контакти</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 30px;">
+    <!-- Контактна інформація -->
+    <div>
+        <h2>Контактна інформація</h2>
+        
+        <div class="card" style="margin-bottom: 15px;">
+            <div class="card-body">
+                <h4>Адреса</h4>
+                <p>{{ contact_info.address }}</p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 15px;">
+            <div class="card-body">
+                <h4>Телефон</h4>
+                <p><a href="tel:{{ contact_info.phone }}">{{ contact_info.phone }}</a></p>
+            </div>
+        </div>
+
+        <div class="card" style="margin-bottom: 15px;">
+            <div class="card-body">
+                <h4>Email</h4>
+                <p><a href="mailto:{{ contact_info.email }}">{{ contact_info.email }}</a></p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <h4>Режим роботи</h4>
+                <p>{{ contact_info.working_hours }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Форма -->
+    <div>
+        <h2>Надішліть нам повідомлення</h2>
+        
+        <form method="POST" style="background: #f5f5f5; padding: 20px; border: 1px solid #ccc;">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 15px;">
+                <label class="form-label">Ім'я:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" name="email" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label class="form-label">Тема:</label>
+                <input type="text" class="form-control" name="subject" required>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label class="form-label">Повідомлення:</label>
+                <textarea class="form-control" name="message" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Надіслати</button>
+        </form>
+    </div>
+</div>
+
+<h2>Часто задавані питання</h2>
+<ul>
+    <li><strong>Як я можу опублікувати статтю?</strong> - Напишіть нам на email</li>
+    <li><strong>Як часто публікуються нові статті?</strong> - Кожного тижня</li>
+    <li><strong>Чи можу я використовувати контент?</strong> - З обов'язковим атрибутуванням</li>
+</ul>
+
+{% endblock %}

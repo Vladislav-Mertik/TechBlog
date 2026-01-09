@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Проекти - Портфоліо{% endblock %}
+
+{% block content %}
+
+<h1>Мої проекти</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 30px 0;">
+    {% for project in projects %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ project.name }}</h3>
+            
+            {% if project.status == 'completed' %}
+            <span class="badge bg-success">Завершен</span>
+            {% elif project.status == 'in_progress' %}
+            <span class="badge bg-warning">В процесі</span>
+            {% else %}
+            <span class="badge bg-info">Планування</span>
+            {% endif %}
+
+            <p class="card-text">{{ project.description }}</p>
+
+            <p><strong>Технології:</strong></p>
+            <p>
+                {% for tech in project.technologies %}
+                <span style="display: inline-block; background: #f0f0f0; padding: 3px 8px; border: 1px solid #ccc; margin-right: 5px; margin-bottom: 5px;">
+                    {{ tech }}
+                </span>
+                {% endfor %}
+            </p>
+
+            <div style="margin: 15px 0;">
+                <div style="background: #e9ecef; border: 1px solid #ccc; height: 10px; border-radius: 3px; overflow: hidden;">
+                    <div style="height: 100%; background-color: #0066cc; width: {% if project.status == 'completed' %}100%{% elif project.status == 'in_progress' %}60%{% else %}10%{% endif %};"></div>
+                </div>
+                <small>
+                    {% if project.status == 'completed' %}100% завершено{% elif project.status == 'in_progress' %}60% завершено{% else %}10% завершено{% endif %}
+                </small>
+            </div>
+
+            {% if project.link != '#' %}
+            <a href="{{ project.link }}" class="btn btn-sm btn-primary" target="_blank">Переглянути</a>
+            {% else %}
+            <button class="btn btn-sm btn-primary" disabled>Скоро</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

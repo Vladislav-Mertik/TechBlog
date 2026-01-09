@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Про нас - TechBlog{% endblock %}
+
+{% block content %}
+
+<h1>Про нас</h1>
+
+<p>TechBlog - це платформа, присвячена поширенню знань у світі веб-розробки та IT технологій.</p>
+
+<h2>Наша команда</h2>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+    {% for member in team_members %}
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">{{ member.name }}</h3>
+            <p><strong>{{ member.role }}</strong></p>
+            <p>{{ member.bio }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<h2>Про проект</h2>
+<p>Ми складаємося з досвідчених розробників, дизайнерів та контент-менеджерів. 
+Наша мета - надати вам найкращі матеріали для навчання та професійного розвитку.</p>
+
+<h2>Статистика</h2>
+<ul>
+    <li>150+ статей опубліковано</li>
+    <li>50K+ активних читачів</li>
+    <li>10+ років досвіду</li>
+    <li>500K+ переглядів</li>
+</ul>
+
+{% endblock %}

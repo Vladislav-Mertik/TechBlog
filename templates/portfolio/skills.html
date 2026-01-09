@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Навички - Портфоліо{% endblock %}
+
+{% block content %}
+
+<h1>Мої навички</h1>
+
+{% for category in skills %}
+<div style="margin-bottom: 40px;">
+    <h2>{{ category.category }}</h2>
+
+    {% for skill in category.items %}
+    <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+            <strong>{{ skill.name }}</strong>
+            <span>{{ skill.level }}%</span>
+        </div>
+        <div style="background: #e9ecef; border: 1px solid #ccc; height: 20px; border-radius: 3px; overflow: hidden;">
+            <div style="height: 100%; background-color: #0066cc; width: {{ skill.level }}%;"></div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<h2>Сертифікати</h2>
+<ul>
+    <li><strong>Python Developer Certification</strong> - 2023</li>
+    <li><strong>Django Advanced Course</strong> - 2023</li>
+    <li><strong>Web Development Mastery</strong> - 2022</li>
+</ul>
+
+{% endblock %}

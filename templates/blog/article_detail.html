@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ article.title }} - TechBlog{% endblock %}
+
+{% block content %}
+
+<h1>{{ article.title }}</h1>
+
+{% if article.is_featured %}
+<span class="badge bg-warning">Рекомендована</span>
+{% endif %}
+
+<p>
+    <strong>Автор:</strong> {{ article.author.username }}<br>
+    <strong>Дата:</strong> {{ article.published_at|date:"d F Y \р." }}<br>
+    <strong>Переглядів:</strong> {{ article.views }}<br>
+    <strong>Лайків:</strong> {{ article.likes }}
+</p>
+
+{% if article.tags.all %}
+<p>
+    <strong>Теги:</strong>
+    {% for tag in article.tags.all %}
+    <span class="badge" style="background-color: {{ tag.color }}">{{ tag.name }}</span>
+    {% endfor %}
+</p>
+{% endif %}
+
+<hr>
+
+<div style="line-height: 1.8; font-size: 16px;">
+    {{ article.content|safe|linebreaks }}
+</div>
+
+<hr>
+
+<div style="background: #f5f5f5; padding: 20px; border: 1px solid #ccc; margin-top: 30px;">
+    <h3>Інформація про автора</h3>
+    <p><strong>{{ article.author.get_full_name|default:article.author.username }}</strong></p>
+    <p>Автор цієї статті</p>
+</div>
+
+<div style="margin-top: 20px;">
+    <a href="{% url 'blog:articles_list' %}" class="btn btn-outline-primary">
+        Повернутися до статей
+    </a>
+</div>
+
+{% endblock %}

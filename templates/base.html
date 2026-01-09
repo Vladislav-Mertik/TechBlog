@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TechBlog{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        header { background: #333; color: white; padding: 20px; }
+        nav { background: #222; padding: 10px 20px; }
+        nav a { color: white; text-decoration: none; margin-right: 20px; }
+        nav a.active { font-weight: bold; border-bottom: 2px solid yellow; }
+        main { padding: 20px; max-width: 1200px; margin: 0 auto; }
+        footer { background: #333; color: white; padding: 20px; text-align: center; margin-top: 40px; }
+        h1, h2, h3 { margin: 20px 0 10px 0; }
+        p { margin-bottom: 10px; }
+        a { color: #0066cc; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <!-- Заголовок -->
+    <header>
+        <h1>TechBlog</h1>
+        <p>Технічний блог для розробників</p>
+    </header>
+
+    <!-- Навігація -->
+    <nav>
+        <a href="{% url 'blog:index' %}" {% if current_page == 'index' %}class="active"{% endif %}>Головна</a>
+        <a href="{% url 'blog:articles_list' %}" {% if current_page == 'articles' %}class="active"{% endif %}>Статті</a>
+        <a href="{% url 'blog:about' %}" {% if current_page == 'about' %}class="active"{% endif %}>Про нас</a>
+        <a href="{% url 'blog:contact' %}" {% if current_page == 'contact' %}class="active"{% endif %}>Контакти</a>
+        <a href="{% url 'portfolio:home' %}">Портфоліо</a>
+    </nav>
+
+    <!-- Основний контент -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <h3>TechBlog</h3>
+        <p>Email: info@techblog.com | Телефон: +38 (097) 123-45-67</p>
+        <p>&copy; 2024 TechBlog. Всі права захищені.</p>
+    </footer>
+</body>
+</html>
